@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+      <!-- Page content-->
+      <!-- Page container-->
+      <div class="container mt-5 mb-md-4 py-5">
+        <!-- Title + Breadcrumb-->
+        <nav class="mb-3 pt-md-3" aria-label="Breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Add property</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Promotion page</li>
+          </ol>
+        </nav>
+        <h1 class="h2 mb-4">Promotion page</h1>
+        <h2 class="h3 pb-2 mb-4">Select your perfect plan to promote your hostel</h2>
+        <div class="row">
+          <div class="col-sm-6 col-md-4 mb-4">
+            <div class="card shadow-sm">
+              <div class="card-body"><img class="d-block mx-auto mt-2 mb-4" src="{% static 'img/pricing/icon-1.svg' %}" width="72" alt="Icon">
+                <h2 class="h5 fw-normal text-center py-1 mb-0">Easy Start</h2>
+                <div class="d-flex align-items-end justify-content-center mb-4">
+                  <div class="h1 mb-0">&#8377;50</div>
+                  <div class="pb-2 ps-2">/month</div>
+                </div>
+                <ul class="list-unstyled d-block mb-0 mx-auto" style="max-width: 16rem;">
+                  <li class="d-flex"><i class="fi-check text-primary fs-sm mt-1 me-2"></i><span>3x more views</span></li>
+                  <li class="d-flex"><i class="fi-check text-primary fs-sm mt-1 me-2"></i><span>Top ads for 3 days</span></li>
+                  <li class="d-flex text-muted"><i class="fi-x fs-xs mt-2 me-2"></i><span>Moving up the list</span></li>
+                  <li class="d-flex text-muted"><i class="fi-x fs-xs mt-2 me-2"></i><span>Featured badge in the results</span></li>
+                </ul>
+              </div>
+              <div class="card-footer py-2 border-0">
+                <div class="border-top text-center pt-4 pb-3"><a class="btn btn-outline-primary" href="#">Choose plan</a></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4 mb-4">
+            <div class="card shadow">
+              <div class="card-body"><img class="d-block mx-auto mt-2 mb-4" src="{% static 'img/pricing/icon-2.svg' %}" width="72" alt="Icon">
+                <h2 class="h5 fw-normal text-center py-1 mb-0">Fast Sale</h2>
+                <div class="d-flex align-items-end justify-content-center mb-4">
+                  <div class="h1 mb-0">&#8377;150</div>
+                  <div class="pb-2 ps-2">/month</div>
+                </div>
+                <ul class="list-unstyled d-block mb-0 mx-auto" style="max-width: 16rem;">
+                  <li class="d-flex"><i class="fi-check text-primary fs-sm mt-1 me-2"></i><span>10x more views</span></li>
+                  <li class="d-flex"><i class="fi-check text-primary fs-sm mt-1 me-2"></i><span>Top ads for 5 days</span></li>
+                  <li class="d-flex"><i class="fi-check text-primary fs-sm mt-1 me-2"></i><span>Moving up the list</span></li>
+                  <li class="d-flex text-muted"><i class="fi-x fs-xs mt-2 me-2"></i><span>Featured badge in the results</span></li>
+                </ul>
+              </div>
+              <div class="card-footer py-2 border-0">
+                <div class="border-top text-center pt-4 pb-3"><a class="btn btn-primary" href="#">Choose plan</a></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+              <div class="card-body"><img class="d-block mx-auto mt-2 mb-4" src="{% static 'img/pricing/icon-3.svg' %}" width="72" alt="Icon">
+                <h2 class="h5 fw-normal text-center py-1 mb-0">Turbo Boost</h2>
+                <div class="d-flex align-items-end justify-content-center mb-4">
+                  <div class="h1 mb-0">&#8377;250</div>
+                  <div class="pb-2 ps-2">/month</div>
+                </div>
+                <ul class="list-unstyled d-block mb-0 mx-auto" style="max-width: 16rem;">
+                  <li class="d-flex"><i class="fi-check text-primary fs-sm mt-1 me-2"></i><span>20x more views</span></li>
+                  <li class="d-flex"><i class="fi-check text-primary fs-sm mt-1 me-2"></i><span>Top ads for 10 days</span></li>
+                  <li class="d-flex"><i class="fi-check text-primary fs-xs mt-2 me-2"></i><span>Moving up the list</span></li>
+                  <li class="d-flex"><i class="fi-check text-primary fs-xs mt-2 me-2"></i><span>Featured badge in the results</span></li>
+                </ul>
+              </div>
+              <div class="card-footer py-2 border-0">
+                <div class="border-top text-center pt-4 pb-3"><a class="btn btn-outline-primary" href="#">Choose plan</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+{% endblock content %}

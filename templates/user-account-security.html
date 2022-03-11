@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+      <!-- Page content-->
+      <div class="container pt-5 pb-lg-4 mt-5 mb-sm-2">
+        <!-- Breadcrumb-->
+        <nav class="mb-4 pt-md-3" aria-label="Breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'user-account-info-page' %}">Account</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Password &amp; Security</li>
+          </ol>
+        </nav>
+        <!-- Page content-->
+        <div class="row">
+          <!-- Sidebar-->
+          <aside class="col-lg-4 col-md-5 pe-xl-4 mb-5">
+            <!-- Account nav-->
+            {% include "account-side-nav.html" %}
+          </aside>
+          <!-- Content-->
+          <div class="col-lg-8 col-md-7 mb-5">
+            <h1 class="h2">Password &amp; Security</h1>
+            <p class="pt-1">Manage your password settings and secure your account.</p>
+            <h2 class="h5">Password</h2>
+            <form class="needs-validation pb-4" novalidate method="post">{% csrf_token %}
+              <div class="row align-items-end mb-2">
+                <div class="col-sm-6 mb-2">
+                  <label class="form-label" for="account-password">Current password</label>
+                  <div class="password-toggle">
+                    {{ password_change_form.old_password }}
+                    <label class="password-toggle-btn" aria-label="Show/hide password">
+                      <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-6 mb-2"><a class="d-inline-block mb-2" href="{% url 'password_reset' %}">Forgot password?</a></div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-sm-6 mb-3">
+                  <label class="form-label" for="account-password-new">New password</label>
+                  <div class="password-toggle">
+                    {{ password_change_form.new_password1 }}
+                    <label class="password-toggle-btn" aria-label="Show/hide password">
+                      <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-6 mb-3">
+                  <label class="form-label" for="account-password-confirm">Confirm password</label>
+                  <div class="password-toggle">
+                    {{ password_change_form.new_password2 }}
+                    <label class="password-toggle-btn" aria-label="Show/hide password">
+                      <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-outline-primary" type="submit">Update password</button>
+            </form>
+            <div class="border-top pt-4 mt-3"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+{% endblock content %}

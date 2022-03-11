@@ -1,0 +1,160 @@
+{% load static %}<!-- Navbar-->
+<header
+  class="navbar navbar-expand-lg navbar-light bg-light fixed-top"
+  data-scroll-header
+>
+  <div class="container">
+    <a class="navbar-brand me-3 me-xl-4" href="/"
+      ><img
+        style="height:20px;"
+        class="d-block"
+        src="{% static 'img/logo/Home (1).svg' %}"
+        width="116"
+        alt="HomeAgain"
+    /></a>
+    <button
+    class="navbar-toggler ms-auto"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      >
+      <span class="navbar-toggler-icon"></span></button>
+      {% if user.is_authenticated %}
+      <div class="dropdown d-none d-lg-block order-lg-3 my-n2 me-3">
+        <a class="d-block py-2" href="{% url 'user-account-info-page' %}"
+          ><img
+            class="rounded-circle"
+            src="{{ user.profile.url }}"
+            width="40"
+            alt="Annette Black"
+        /></a>
+        <div class="dropdown-menu dropdown-menu-end">
+          <div
+            class="d-flex align-items-start border-bottom px-3 py-1 mb-2"
+            style="width: 16rem"
+          >
+            <img
+              class="rounded-circle"
+              src="{{ user.profile.url }}"
+              width="48"
+              alt="{{ user.username }}"
+            />
+            <div class="ps-2">
+              <h6 class="fs-base mb-0">{{ user.username }}</h6>
+              <span class="star-rating star-rating-sm"
+                ><i class="star-rating-icon fi-star-filled active"></i
+                ><i class="star-rating-icon fi-star-filled active"></i
+                ><i class="star-rating-icon fi-star-filled active"></i
+                ><i class="star-rating-icon fi-star-filled active"></i
+                ><i class="star-rating-icon fi-star-filled active"></i
+              ></span>
+              <div class="fs-xs py-2">
+                {{ user.phone_no }}<br />{{ user.email }}
+              </div>
+            </div>
+          </div>
+          <a class="dropdown-item" href="{% url 'user-account-info-page' %}"
+            ><i class="fi-user opacity-60 me-2"></i>Personal Info</a
+          ><a class="dropdown-item" href="{% url 'user-account-security-page' %}"
+            ><i class="fi-lock opacity-60 me-2"></i>Password &amp;
+            Security</a>
+          {% if user.user_type == 'HO' %}
+          <a
+            class="dropdown-item"
+            href="{% url 'vendor-account-properties-page' %}"
+            ><i class="fi-home opacity-60 me-2"></i>My Properties</a>
+          {% else %}
+            <a class="dropdown-item" href="{% url 'user-account-wishlist-page' %}"
+            ><i class="fi-heart opacity-60 me-2"></i>Wishlist</a>
+          {% endif %}  
+          <a class="dropdown-item" href="{% url 'user-account-reviews-page' %}"
+            ><i class="fi-star opacity-60 me-2"></i>Reviews</a
+          >
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'help-center-page' %}">Help</a
+          ><a class="dropdown-item" href="{% url 'sign-out-page' %}">Sign Out</a>
+        </div>
+      </div>
+      {% if user.user_type == 'HO' %}
+        <a class="btn btn-primary btn-sm ms-2 order-lg-3" href="{% url 'add-property-page' %}"><i class="fi-plus me-2"></i>Add<span class="d-none d-sm-inline"> property</span></a>
+      {% endif %} 
+      {% else %}
+    {% if password_reset == false %}
+    <a
+      class="btn btn-sm text-primary d-none d-lg-block order-lg-3"
+      href="#signin-modal"
+      data-bs-toggle="modal"
+      ><i class="fi-user me-2"></i>Sign in</a
+    >
+    <a
+      class="btn btn-primary btn-sm ms-2 order-lg-3"
+      href="#signup-modal"
+      data-bs-toggle="modal"
+      ><i class="fi-user me-2"></i>Sign up<span
+        class="d-none d-sm-inline"
+      ></span
+    ></a>
+    {% endif %}
+    {% endif %}
+    <div class="collapse navbar-collapse order-lg-2" id="navbarNav">
+      <ul class="navbar-nav navbar-nav-scroll" style="max-height: 35rem">
+        <!-- Menu items-->
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        {% if user.user_type == 'HO' %}
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            >Vendor</a
+          >
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" href="{% url 'add-property-page' %}"
+                >Add Property</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'vendor-account-properties-page' %}"
+                >Vendor Properties</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'user-account-reviews-page' %}"
+                >Vendor Reviews</a
+              >
+            </li>
+          </ul>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'about-us-page' %}">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'contact-us-page' %}">Contacts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'help-center-page' %}">Help Center</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item d-lg-none">
+          <a class="nav-link" href="{% url 'user-account-info-page' %}"
+            ><i class="fi-user me-2"></i>{{ user.username }}</a>
+        </li>
+        {% else %}
+        <li class="nav-item d-lg-none">
+          <a class="nav-link" href="#signin-modal" data-bs-toggle="modal"
+            ><i class="fi-user me-2"></i>Sign in</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</header>

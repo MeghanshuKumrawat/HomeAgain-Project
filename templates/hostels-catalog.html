@@ -1,0 +1,314 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+      <!-- Page content-->
+      <!-- Page container-->
+      <div class="container-fluid mt-5 pt-5 p-0">
+        <div class="row g-0 mt-n3">
+          <!-- Filters sidebar (Offcanvas on mobile)-->
+          <aside
+            class="col-lg-4 col-xl-3 border-top-lg border-end-lg shadow-sm px-3 px-xl-4 px-xxl-5 pt-lg-2"
+          >
+            <div
+              class="offcanvas offcanvas-start offcanvas-collapse"
+              id="filters-sidebar"
+            >
+              <div class="offcanvas-header d-flex d-lg-none align-items-center">
+                <h2 class="h5 mb-0">Filters</h2>
+                <button
+                  class="btn-close"
+                  type="button"
+                  data-bs-dismiss="offcanvas"
+                ></button>
+              </div>
+              
+              <div class="offcanvas-body py-lg-4">
+                <form method="get">
+                <div class="pb-4 mb-2">
+                  <h3 class="h6">Amenities</h3>
+                  <div
+                    class="overflow-auto"
+                    data-simplebar
+                    data-simplebar-auto-hide="false"
+                    style="height: 11rem"
+                  >
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="air-condition"
+                        name="air_conditioning"
+                      />
+                      <label class="form-check-label fs-sm" for="air-condition"
+                        >Air conditioning</label
+                      >
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="balcony"
+                      />
+                      <label class="form-check-label fs-sm" for="balcony"
+                        >Balcony</label
+                      >
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="garage"
+                      />
+                      <label class="form-check-label fs-sm" for="garage"
+                        >Wifi</label
+                      >
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="gym"
+                      />
+                      <label class="form-check-label fs-sm" for="gym"
+                        >Gym</label
+                      >
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="parking"
+                      />
+                      <label class="form-check-label fs-sm" for="parking"
+                        >Parking</label
+                      >
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="pool"
+                      />
+                      <label class="form-check-label fs-sm" for="pool"
+                        >Pool</label
+                      >
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="camera"
+                      />
+                      <label class="form-check-label fs-sm" for="camera"
+                        >Security cameras</label
+                      >
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="laundry"
+                      />
+                      <label class="form-check-label fs-sm" for="laundry"
+                        >Laundry</label
+                      >
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="dishwasher"
+                      />
+                      <label class="form-check-label fs-sm" for="dishwasher"
+                        >Dishwasher</label
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="pb-4 mb-2">
+                  <h3 class="h6">Pets</h3>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="allow-cats"
+                    />
+                    <label class="form-check-label fs-sm" for="allow-cats"
+                      >Cats allowed</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="allow-dogs"
+                    />
+                    <label class="form-check-label fs-sm" for="allow-dogs"
+                      >Dogs allowed</label
+                    >
+                  </div>
+                </div>
+                <div class="pb-4 mb-2">
+                  <h3 class="h6">Additional options</h3>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="verified"
+                    />
+                    <label class="form-check-label fs-sm" for="verified"
+                      >Verified</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="featured"
+                    />
+                    <label class="form-check-label fs-sm" for="featured"
+                      >Featured</label
+                    >
+                  </div>
+                </div>
+                <div class="border-top py-4">
+                  <button class="btn btn-outline-primary" type="submit">
+                    <i class="fi-rotate-right me-2"></i>Submit filters
+                  </button>
+                </div>
+                </form>
+              </div>
+            </div>
+          </aside>
+          <!-- Page content-->
+          <div
+            class="col-lg-8 col-xl-9 position-relative overflow-hidden pb-5 pt-4 px-3 px-xl-4 px-xxl-5"
+          >
+            <!-- Map popup-->
+            <div class="map-popup invisible" id="map">
+              <button
+                class="btn btn-icon btn-light btn-sm shadow-sm rounded-circle"
+                type="button"
+                data-bs-toggle-class="invisible"
+                data-bs-target="#map"
+              >
+                <i class="fi-x fs-xs"></i>
+              </button>
+              <div
+                class="interactive-map"
+                data-map-options-json="json/map-options-real-estate-rent.json"
+              ></div>
+            </div>
+            <!-- Breadcrumb-->
+            <nav class="mb-3 pt-md-2" aria-label="Breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="/">Home</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  Recommended hostels for rent
+                </li>
+              </ol>
+            </nav>
+            <!-- Title-->
+            <div
+              class="d-sm-flex align-items-center justify-content-between pb-3 pb-sm-4"
+            >
+              <h1 class="h2 mb-sm-0">Hostels for rent</h1>
+              <a
+                class="d-inline-block fw-bold text-decoration-none py-1"
+                href="#"
+                data-bs-toggle-class="invisible"
+                data-bs-target="#map"
+                ><i class="fi-map me-2"></i>Map view</a
+              >
+            </div>
+            <!-- Sorting-->
+            <div
+              class="d-flex flex-sm-row flex-column align-items-sm-center align-items-stretch my-2"
+            >
+              <div class="d-flex align-items-center flex-shrink-0">
+              
+              </div>
+              <hr class="d-none d-sm-block w-100 mx-4" />
+              <div
+                class="d-none d-sm-flex align-items-center flex-shrink-0 text-muted"
+              >
+                <i class="fi-check-circle me-2"></i
+                ><span class="fs-sm mt-n1"> results</span>
+              </div>
+            </div>
+            <!-- Catalog grid-->
+            <div class="row g-4 py-4">
+              <!-- Item-->
+              {% for property in properties %}
+              <div class="col-sm-6 col-xl-4">
+                <div class="card shadow-sm card-hover border-0 h-100">
+                  <div class="tns-carousel-wrapper card-img-top card-img-hover">
+                    <a class="img-overlay" href="{% url 'hostel-single-view' property.pk %}"></a>
+                    <div class="position-absolute start-0 top-0 pt-3 ps-3">
+                      <span class="d-table badge bg-success mb-1">Verified</span
+                      ><span class="d-table badge bg-info">New</span>
+                    </div>
+                    <div class="content-overlay end-0 top-0 pt-3 pe-3">
+                      <a
+                        class="btn btn-icon btn-light btn-xs text-primary rounded-circle"
+                        href="{% url 'add-hostel-wishlist' property.pk %}"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="left"
+                        title="Add to Wishlist"
+                      >
+                        <i class="fi-heart"></i>
+                    </a>
+                    </div>
+                    <div class="tns-carousel-inner">
+                      {% for img in property.hostel_images_set.all %}
+                      <img style="width: 612px; height:300px;"
+                        src="{{ img.image.url }}"
+                        alt="Image"/>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <div class="card-body position-relative pb-3">
+                    <h4
+                      class="mb-1 fs-xs fw-normal text-uppercase text-primary"
+                    >
+
+                    </h4>
+                    <h3 class="h6 mb-2 fs-base">
+                      <a
+                        class="nav-link stretched-link"
+                        href="{% url 'hostel-single-view' property.pk %}"
+                        >{{ property.title }} | {{ property.total_area }} sq.m</a
+                      >
+                    </h3>
+                    <p class="mb-2 fs-sm text-muted">
+                      {{ property.street_address }} {{ property.city }}, {{ property.state }}, {{ property.pin_code}} 
+                    </p>
+                    <div class="fw-bold">
+                      <i
+                        class="fi-home mt-n1 me-2 lead align-middle opacity-70"
+                      ></i
+                      >{% if property.category == 'boys' %}Boys{% else %}Girls{% endif %}
+                    </div>
+                  </div>
+                  <div
+                    class="card-footer d-flex align-items-center justify-content-center mx-3 pt-3 text-nowrap"
+                  >
+                  {% if property.wifi %}<span class="d-inline-block mx-1 px-2 fs-sm"
+                      ><i class="fi-wifi ms-1 mt-n1 fs-lg text-muted"></i></span>{% endif %}
+                  {% if property.mess %}<span class="d-inline-block mx-1 px-2 fs-sm">
+                    <i class="fi-cafe ms-1 mt-n1 fs-lg text-muted"></i></span>{% endif %}
+                  {% if property.air_conditioning %}<span class="d-inline-block mx-1 px-2 fs-sm"
+                      ><i class="fi-snowflake ms-1 mt-n1 fs-lg text-muted"></i></span>{% endif %}
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+              <!-- Item-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    {% endblock content %}

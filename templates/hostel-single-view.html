@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_tags %}
+{% load social_share %}
+{% block content %}
+      <!-- Page content-->
+      <!-- Page header-->
+      <section class="container pt-5 mt-5">
+        <!-- Breadcrumb-->
+        <nav class="mb-3 pt-md-3" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'hostels-catalog-page' %}">Hostels for rent</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ property.title }}</li>
+          </ol>
+        </nav>
+        <h1 class="h2 mb-2">{{ property.title }}</h1>
+        <p class="mb-2 pb-1 fs-lg">{{ property.street_address }} {{ property.city }}, {{ property.state }}, {{ property.pin_code}}</p>
+        <!-- Features + Sharing-->
+        <div class="d-flex justify-content-between align-items-center">
+          <ul class="d-flex mb-4 list-unstyled">
+            {% if property.wifi %}<li class="me-3 pe-3 border-end"><b class="me-1"></b><i class="fi-wifi mt-n1 lead align-middle text-muted"></i></li>{% endif %}
+            {% if property.mess %}<li class="me-3 pe-3 border-end"><b class="me-1"></b><i class="fi-cafe mt-n1 lead align-middle text-muted"></i></li>{% endif %}
+            {% if property.air_conditioning %}<li class="me-3 pe-3 border-end"><b class="me-1"></b><i class="fi-snowflake mt-n1 lead align-middle text-muted"></i></li>{% endif %}
+            <li><b>{{ property.total_area }} </b>sq.m</li>
+          </ul>
+          <div class="text-nowrap">
+            {% if user.user_type == 'HS' %}<a href="{% url 'add-hostel-wishlist' property.pk %}" class="btn btn-icon btn-light-primary btn-xs shadow-sm rounded-circle ms-2 mb-2" data-bs-toggle="tooltip" title="Add to Wishlist"><i class="fi-heart"></i></a>{% endif %}
+            <div class="dropdown d-inline-block" data-bs-toggle="tooltip" title="Share">
+              <button class="btn btn-icon btn-light-primary btn-xs shadow-sm rounded-circle ms-2 mb-2" type="button" data-bs-toggle="dropdown"><i class="fi-share"></i></button>
+              <div class="dropdown-menu dropdown-menu-end my-1">
+                <button class="dropdown-item" type="button">{% post_to_facebook  object_or_url '<i class="fi-facebook fs-base opacity-75 me-2"></i>Facebook' %}</button>
+                <button class="dropdown-item" type="button">{% post_to_twitter "" object_or_url '<i class="fi-twitter fs-base opacity-75 me-2"></i>Twitter' %}</button>
+                <button class="dropdown-item" type="button">{% post_to_whatsapp  object_or_url '<i class="fi-whatsapp fs-base opacity-75 me-2"></i>Whatsapp' %}</button>
+                <button class="dropdown-item" type="button">{% post_to_telegram "" object_or_url '<i class="fi-telegram fs-base opacity-75 me-2"></i>Telegram' %}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Gallery-->
+      <section class="container overflow-auto mb-4 pb-3" data-simplebar>
+        <div class="row g-2 g-md-3 gallery" data-thumbnails="true" style="min-width: 30rem;">
+          {% if images.0.image %}
+          <div class="col-8"><a class="gallery-item rounded rounded-md-3" href="{{ images.0.image.url }}" data-sub-html="&lt;h6 class=&quot;fs-sm text-light&quot;&gt;Bathroom&lt;/h6&gt;">
+            <img src="{{ images.0.image.url }}" alt="Gallery thumbnail"></a></div>
+          {% endif %}
+          
+          <div class="col-4">
+            {% if images.1.image %}
+            <a class="gallery-item rounded rounded-md-3 mb-2 mb-md-3" href="{{ images.1.image.url }}" data-sub-html="&lt;h6 class=&quot;fs-sm text-light&quot;&gt;Bedroom&lt;/h6&gt;">
+            <img src="{{ images.1.image.url }}" alt="Gallery thumbnail"></a>
+            {% endif %}
+            {% if images.2.image %}
+            <a class="gallery-item rounded rounded-md-3" href="{{ images.2.image.url }}" data-sub-html="&lt;h6 class=&quot;fs-sm text-light&quot;&gt;Living room&lt;/h6&gt;">
+              <img src="{{ images.2.image.url }}" alt="Gallery thumbnail"></a></div>
+            {% endif %}
+          <div class="col-12">
+            <div class="row g-2 g-md-3">
+              <div class="col"><a class="gallery-item rounded-1 rounded-md-2" href="{{ images.3.image.url }}" data-sub-html="&lt;h6 class=&quot;fs-sm text-light&quot;&gt;Bedroom&lt;/h6&gt;">{% if images.3.image %}<img src="{{ images.3.image.url }}" alt="Gallery thumbnail">{% endif %}</a></div>
+              <div class="col"><a class="gallery-item rounded-1 rounded-md-2" href="{{ images.4.image.url }}" data-sub-html="&lt;h6 class=&quot;fs-sm text-light&quot;&gt;Kitchen&lt;/h6&gt;">{% if images.4.image %}<img src="{{ images.4.image.url }}" alt="Gallery thumbnail">{% endif %}</a></div>
+              <div class="col"><a class="gallery-item rounded-1 rounded-md-2" href="{{ images.5.image.url }}" data-sub-html="&lt;h6 class=&quot;fs-sm text-light&quot;&gt;Living room&lt;/h6&gt;">{% if images.5.image %}<img src="{{ images.5.image.url }}" alt="Gallery thumbnail">{% endif %}</a></div>
+              <div class="col"><a class="gallery-item rounded-1 rounded-md-2" href="{{ images.6.image.url }}" data-sub-html="&lt;h6 class=&quot;fs-sm text-light&quot;&gt;Bathroom&lt;/h6&gt;">{% if images.6.image %}<img src="{{ images.6.image.url }}" alt="Gallery thumbnail">{% endif %}</a></div>
+              <div class="col"><a class="gallery-item more-item rounded-1 rounded-md-2" href="{{ images.7.image.url }}" data-sub-html="&lt;h6 class=&quot;fs-sm text-light&quot;&gt;Bathroom&lt;/h6&gt;">{% if images.7.image %}<img src="{{ images.7.image.url }}" alt="Gallery thumbnail">{% endif %}<span class="gallery-item-caption fs-base">+5 <span class='d-none d-md-inline'>photos</span></span></a></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Post content-->
+      <section class="container mb-5 pb-1">
+        <div class="row">
+          <div class="col-md-6 mb-md-0 mb-4"><span class="badge bg-success me-2 mb-3">Verified</span><span class="badge bg-info me-2 mb-3">New</span>
+            {% if property.one_seater_room %}<h2 class="h3 mb-4 pb-4 border-bottom">Single Seater - {% if property.one_seater_price %}&#8377;{{ property.one_seater_price }}{% else %}Not set yet{% endif %}<span class="d-inline-block ms-1 fs-base fw-normal text-body">/month</span></h2>{% endif %}
+            {% if property.two_seater_room %}<h2 class="h3 mb-4 pb-4 border-bottom">Two Seater - {% if property.two_seater_price %}&#8377;{{ property.two_seater_price }}{% else %}Not set yet{% endif %}<span class="d-inline-block ms-1 fs-base fw-normal text-body">/month</span></h2>{% endif %}
+            {% if property.three_seater_room %}<h2 class="h3 mb-4 pb-4 border-bottom">Three Seater - {% if property.three_seater_price %}&#8377;{{ property.three_seater_price }}{% else %}Not set yet{% endif %}<span class="d-inline-block ms-1 fs-base fw-normal text-body">/month</span></h2>{% endif %}
+            <!-- Overview-->
+            <div class="mb-4 pb-md-3">
+              <h3 class="h4">Overview</h3>
+              <p class="mb-1">{{ property.description }}</p>
+              <!-- <div class="collapse" id="seeMoreOverview">
+                <p class="mb-1">{{ property.description }}</p>
+              </div><a class="collapse-label collapsed" href="#seeMoreOverview" data-bs-toggle="collapse" data-bs-label-collapsed="Show more" data-bs-label-expanded="Show less" role="button" aria-expanded="false" aria-controls="seeMoreOverview"></a> -->
+            </div>
+            <!-- Property Details-->
+            <div class="mb-4 pb-md-3">
+              <h3 class="h4">Property Details</h3>
+              <ul class="list-unstyled mb-0">
+                <li><b>Type : </b>{% if property.type == 'PB' %}Privet{% else %}Registered{% endif %}</li>
+                <li><b>Category : </b>{% if property.category == 'boys' %}Boys{% else %}Girls{% endif %}</li>
+                <li><b>Apartment area : </b>{{ property.total_area }} sq.m</li>
+                {% if property.one_seater_room %}
+                <li><b>Single seater bedrooms : </b>{{ property.one_seater_room }}</li>
+                {% endif %}
+                {% if property.two_seater_room %}
+                <li><b>Two seater bedrooms : </b>{{ property.two_seater_room }}</li>
+                {% endif %}
+                {% if property.three_seater_room %}
+                <li><b>Three seater bedrooms : </b>{{ property.three_seater_room }}</li>
+                {% endif %}
+
+                <!-- <li><b>Parking places: </b>2</li> -->
+                <!-- <li><b>Pets allowed: </b>cats only</li> -->
+              </ul>
+            </div>
+            
+            <!-- Post meta-->
+            <div class="mb-lg-5 mb-md-4 pb-lg-2 py-4 border-top">
+              <ul class="d-flex mb-4 list-unstyled fs-sm">
+                <li class="me-3 pe-3 border-end">Published: <b>{{ property.timestamp }}</b></li>
+                <!-- <li class="me-3 pe-3 border-end">Ad number: <b>681013232</b></li> -->
+                <!-- <li class="me-3 pe-3">Views: <b>48</b></li> -->
+              </ul>
+            </div>
+            <!-- Reviews-->
+            <div class="mb-4 pb-4 border-bottom">
+              <h3 class="h4 pb-3"><i class="fi-star-filled mt-n1 me-2 lead align-middle text-warning"></i>{% if reviews|length > 0 %}{% avg_review reviews %}{% endif %} ({{ reviews|length }} reviews)</h3>
+              <div class="d-flex align-items-center ms-sm-4">
+                  <div class="d-flex flex-sm-row flex-column align-items-sm-center align-items-stretch justify-content-between">{% if user.user_type == 'HS' %}<a class="btn btn-outline-primary mb-sm-0 mb-3" href="#modal-review" data-bs-toggle="modal"><i class="fi-edit me-1"></i>Add review</a>{% endif %}
+                </div>
+              </div>
+            </div>
+            <!-- Review-->
+            {% for review in reviews %}
+            <div class="mb-4 pb-4 border-bottom">
+              <div class="d-flex justify-content-between mb-3">
+                <div class="d-flex align-items-center pe-2"><img class="rounded-circle me-1" src="{{ review.user.profile.url }}" width="48" alt="Avatar">
+                  <div class="ps-2">
+                    <h6 class="fs-base mb-0">{% if review.user.first_name %}{{ review.user.first_name }} {{ review.user.last_name }}{% else %}{{ review.user.username }}{% endif %}</h6><span class="star-rating"><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i></span>
+                  </div>
+                </div><span class="text-muted fs-sm">{{ review.timestamp }}</span>
+              </div>
+              <p>{{ review.comment }}</p>
+              <!-- <div class="d-flex align-items-center">
+                <button class="btn-like" type="button"><i class="fi-like"></i><span>(3)</span></button>
+                <div class="border-end me-1">&nbsp;</div>
+                <button class="btn-dislike" type="button"><i class="fi-dislike"></i><span>(0)</span></button>
+              </div> -->
+            </div>
+            {% endfor %}
+            <!-- Review-->
+            
+          </div>
+          <!-- Sidebar-->
+          <aside class="col-lg-5 col-md-6 ms-lg-auto pb-1">
+            <!-- Contact card-->
+            <div class="card shadow-sm mb-4">
+              <div class="card-body">
+                <!-- Amenities-->
+            <div class="mb-4 pb-md-3">
+              <h3 class="h4">Amenities</h3>
+              <ul class="list-unstyled row row-cols-lg-3 row-cols-md-2 row-cols-1 gy-1 mb-1 text-nowrap">
+                
+                {% if property.wifi %}<li class="col"><i class="fi-wifi mt-n1 me-2 fs-lg align-middle"></i>WiFi</li>{% endif %}
+                {% if property.water_heating %}<li class="col"><i class="fi-thermometer mt-n1 me-2 fs-lg align-middle"></i>Water Heating</li>{% endif %}
+                {% if property.kitchen %}<li class="col"><i class="fi-dish mt-n1 me-2 fs-lg align-middle"></i>Kitchen</li>{% endif %}
+                {% if property.parking %}<li class="col"><i class="fi-parking mt-n1 me-2 fs-lg align-middle"></i>Parking place</li>{% endif %}
+                {% if property.air_conditioning %}<li class="col"><i class="fi-snowflake mt-n1 me-2 fs-lg align-middle"></i>Air conditioning</li>{% endif %}
+                {% if property.iron %}<li class="col"><i class="fi-iron mt-n1 me-2 fs-lg align-middle"></i>Iron</li>{% endif %}
+                {% if property.tv %}<li class="col"><i class="fi-tv mt-n1 me-2 fs-lg align-middle"></i>TV</li>{% endif %}
+                {% if property.laundry %}<li class="col"><i class="fi-laundry mt-n1 me-2 fs-lg align-middle"></i>Laundry</li>{% endif %}
+                {% if property.security_cameras %}<li class="col"><i class="fi-cctv mt-n1 me-2 fs-lg align-middle"></i>Security cameras</li>{% endif %}
+              </ul>
+              <div class="collapse" id="seeMoreAmenities">
+                <ul class="list-unstyled row row-cols-lg-3 row-cols-md-2 row-cols-1 gy-1 mb-1 text-nowrap">
+                  {% if property.gym %}<li class="col"><i class="fi-flame mt-n1 me-2 fs-lg align-middle"></i>Gym</li>{% endif %}
+                  {% if property.pets_friendly %}<li class="col"><i class="fi-pet mt-n1 me-2 fs-lg align-middle"></i>Pets Friendly</li>{% endif %}
+                  {% if property.balcony %}<li class="col"><i class="fi-swimming-pool mt-n1 me-2 fs-lg align-middle"></i>Balcony</li>{% endif %}
+                  {% if property.linens %}<li class="col"><i class="fi-double-bed mt-n1 me-2 fs-lg align-middle"></i>Linens</li>{% endif %}
+                  {% if property.watercooler %}<li class="col"><i class="fi-glass mt-n1 me-2 fs-lg align-middle"></i>Water Cooler</li>{% endif %}
+                  {% if property.mess %}<li class="col"><i class="fi-cafe mt-n1 me-2 fs-lg align-middle"></i>Mess</li>{% endif %}
+                  {% if property.attached_bathrooms %}<li class="col"><i class="fi-bath mt-n1 me-2 fs-lg align-middle"></i>Attached Bathroom</li>{% endif %}
+                </ul>
+              </div><a class="collapse-label collapsed" href="#seeMoreAmenities" data-bs-toggle="collapse" data-bs-label-collapsed="Show more" data-bs-label-expanded="Show less" role="button" aria-expanded="false" aria-controls="seeMoreAmenities"></a>
+            </div>
+              </div>
+            </div>
+            <!-- Location (Map)-->
+            <!-- <div class="pt-2">
+              <div class="position-relative mb-2"><img class="rounded-3" src="{% static 'img/real-estate/single/map.jpg' %}" alt="Map">
+                <div class="d-flex w-100 h-100 align-items-center justify-content-center position-absolute top-0 start-0"><a class="btn btn-primary stretched-link" href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.6145424811048!2d-73.93999278406218!3d40.74850644331743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2592979d4827f%3A0x3a5d8b3cf779f3b6!2s28%20Jackson%20Ave%2C%20Long%20Island%20City%2C%20NY%2011101%2C%20USA!5e0!3m2!1sen!2sua!4v1618074552281!5m2!1sen!2sua" data-iframe="true" data-bs-toggle="lightbox"><i class="fi-route me-2"></i>Get directions</a></div>
+              </div>
+              <p class="mb-0 fs-sm text-center">{{ property.street_address }} {{ property.city }}, {{ property.state }}, {{ property.pin_code}}</p>
+            </div> -->
+          </aside>
+        </div>
+      </section>
+      <!-- Recently viewed-->
+    </main>
+   {% endblock content %}

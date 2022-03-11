@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+      <!-- Page content-->
+      <div class="container pt-5 pb-lg-4 mt-5 mb-sm-2">
+        <!-- Breadcrumb-->
+        <nav class="mb-4 pt-md-3" aria-label="Breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'user-account-info-page' %}">Account</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Reviews</li>
+          </ol>
+        </nav>
+        <!-- Page content-->
+        <div class="row">
+          <!-- Sidebar-->
+          <aside class="col-lg-4 col-md-5 pe-xl-4 mb-5">
+            <!-- Account nav-->
+            {% include "account-side-nav.html" %}
+          </aside>
+          <!-- Content-->
+          <div class="col-lg-8 col-md-7 mb-5">
+            <h1 class="h2">Reviews</h1>
+            <p class="pt-1 mb-4">Reviews you’ve received will be visible both here and on your public profile.</p>
+            <!-- Nav tabs-->
+            <ul class="nav nav-tabs flex-column flex-sm-row align-items-stretch align-items-sm-start border-bottom mb-4" role="tablist">
+              <li class="nav-item mb-3"><a class="nav-link text-center active" href="#reviews-by-you" data-bs-toggle="tab" role="tab" aria-controls="reviews-by-you" aria-selected="false">Reviews by you</a></li>
+              {% if user.user_type == 'HO' %}<li class="nav-item me-sm-3 mb-3"><a class="nav-link text-center" href="#reviews-about-you" data-bs-toggle="tab" role="tab" aria-controls="reviews-about-you" aria-selected="true">Reviews about you</a></li>{% endif %}
+            </ul>
+            <!-- Tabs content-->
+            <div class="tab-content pt-2">
+              <!-- Reviews about you tab-->
+              {% if user.user_type == 'HO' %}
+              <div class="tab-pane fade" id="reviews-about-you" role="tabpanel">
+                <div class="d-flex flex-sm-row flex-column align-items-sm-center align-items-stretch justify-content-between pb-4 mb-2 mb-md-3">
+                  <h3 class="h4 mb-sm-0"><i class="fi-star-filled mt-n1 me-2 lead align-middle text-warning"></i>4,9 ({{ reviews_about_you|length }} reviews)</h3>
+                  <div class="d-flex align-items-center ms-sm-4">
+                    <label class="fs-sm me-2 pe-1 text-nowrap" for="review-sorting1"><i class="fi-arrows-sort text-muted mt-n1 me-2"></i>Sort by:</label>
+                    <select class="form-select form-select-sm" id="review-sorting1">
+                      <option>Newest</option>
+                      <option>Oldest</option>
+                      <option>Popular</option>
+                      <option>High rating</option>
+                      <option>Low rating</option>
+                    </select>
+                  </div>
+                </div>
+                <!-- Review-->
+                {% for review in reviews_about_you %}
+                <div class="mb-4 pb-4 border-bottom">
+                  <div class="d-flex justify-content-between mb-3">
+                    <div class="d-flex align-items-center pe-2"><img class="rounded-circle me-1" src="{{ review.user.profile.url }}" width="48" alt="Avatar">
+                      <div class="ps-2">
+                        <h6 class="fs-base mb-0">{{ review.user.username }}</h6><span class="star-rating"><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i></span>
+                      </div>
+                    </div><span class="text-muted fs-sm">Jan 17, 2021</span>
+                  </div>
+                  <p>{{ review.comment }}</p>
+                </div>
+                {% endfor %}
+                
+                <!-- Pagination-->
+                <nav class="mt-2" aria-label="Reviews pagination">
+                  <ul class="pagination">
+                    <li class="page-item d-sm-none"><span class="page-link page-link-static">1 / 5</span></li>
+                    <li class="page-item active d-none d-sm-block" aria-current="page"><span class="page-link">1<span class="visually-hidden">(current)</span></span></li>
+                    <li class="page-item d-none d-sm-block"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item d-none d-sm-block"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item d-none d-sm-block">...</li>
+                    <li class="page-item d-none d-sm-block"><a class="page-link" href="#">8</a></li>
+                    <li class="page-item"><a class="page-link" href="#" aria-label="Next"><i class="fi-chevron-right"></i></a></li>
+                  </ul>
+                </nav>
+              </div>
+              {% endif %}
+              <!-- Reviews by you tab-->
+              <div class="tab-pane fade show active" id="reviews-by-you" role="tabpanel">
+                <div class="d-flex flex-sm-row flex-column align-items-sm-center align-items-stretch justify-content-between pb-4 mb-2 mb-md-3">
+                  <h3 class="h4 mb-sm-0">{{ reviews_by_you|length }} reviews</h3>
+                  <div class="d-flex align-items-center ms-sm-4">
+                    <label class="fs-sm me-2 pe-1 text-nowrap" for="review-sorting2"><i class="fi-arrows-sort text-muted mt-n1 me-2"></i>Sort by:</label>
+                    <select class="form-select form-select-sm" id="review-sorting2">
+                      <option>Newest</option>
+                      <option>Oldest</option>
+                      <option>Popular</option>
+                      <option>High rating</option>
+                      <option>Low rating</option>
+                    </select>
+                  </div>
+                </div>
+                <!-- Review-->
+                {% for review in reviews_by_you %}
+                <div class="mb-4 pb-4 border-bottom">
+                  <div class="d-flex justify-content-between mb-3">
+                    <div class="pe-2">
+                      <h6 class="mb-0"> <span class="fw-normal text-muted me-1">For:</span><a class="text-dark" href="{% url 'hostel-single-view' review.hostel.pk %}">{{ review.hostel.title }}</a></h6><span class="star-rating"><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star"></i><i class="star-rating-icon fi-star"></i><i class="star-rating-icon fi-star"></i></span>
+                    </div><span class="text-muted fs-sm">{{ review.timestamp }}</span>
+                  </div>
+                  <p>{{ review.comment }}</p>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    {% endblock content %}

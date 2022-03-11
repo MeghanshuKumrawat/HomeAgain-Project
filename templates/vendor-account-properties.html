@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+      <!-- Page content-->
+      <div class="container pt-5 pb-lg-4 mt-5 mb-sm-2">
+        <!-- Breadcrumb-->
+        <nav class="mb-4 pt-md-3" aria-label="Breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'user-account-info-page' %}">Account</a></li>
+            <li class="breadcrumb-item active" aria-current="page">My Properties</li>
+          </ol>
+        </nav>
+        <!-- Page content-->
+        <div class="row">
+          <!-- Sidebar-->
+          <aside class="col-lg-4 col-md-5 pe-xl-4 mb-5">
+            <!-- Account nav-->
+            {% include "account-side-nav.html" %}
+          </aside>
+          <!-- Content-->
+          <div class="col-lg-8 col-md-7 mb-5">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+            </div>
+            <p class="pt-1 mb-4">Here you can see your property offers and edit them easily.</p>
+            <!-- Nav tabs-->
+            <ul class="nav nav-tabs border-bottom mb-4" role="tablist">
+              <li class="nav-item mb-3"><a class="nav-link active" href="#" role="tab" aria-selected="true"><i class="fi-file fs-base me-2"></i>Published</a></li>
+            </ul>
+            <!-- Item-->
+            {% for property, image in properties %}
+            <div class="card card-hover card-horizontal border-0 shadow-sm mb-4"><a class="card-img-top" href="{% url 'hostel-single-view' property.pk %}" style="background-image: url({{ image.image.url }});">
+                <div class="position-absolute start-0 top-0 pt-3 ps-3"><span class="d-table badge bg-{% if property.vacant %}info{% else %}danger{% endif %}">{% if property.vacant %}Activated{% else %}Deactivated{% endif %}</span></div></a>
+              <div class="card-body position-relative pb-3">
+                <div class="dropdown position-absolute zindex-5 top-0 end-0 mt-3 me-3">
+                  <button class="btn btn-icon btn-light btn-xs rounded-circle shadow-sm" type="button" id="contextMenu1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fi-dots-vertical"></i></button>
+                  <ul class="dropdown-menu my-1" aria-labelledby="contextMenu1">
+                    <li>
+                      <a class="dropdown-item" href="{% url 'edit-property-page' property.pk %}"><i class="fi-edit opacity-60 me-2"></i>Edit</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="{% url 'hostel-promotion-page' %}"><i class="fi-flame opacity-60 me-2"></i>Promote</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="{% url 'activate-property-page' property.pk %}"><i class="fi-power opacity-60 me-2"></i>{% if property.vacant %}Deactivate{% else %}Activate{% endif %}</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="{% url 'delete-property-page' property.pk %}"><i class="fi-trash opacity-60 me-2"></i>Delete</a>
+                    </li>
+                  </ul>
+                </div>
+                <h4 class="mb-1 fs-xs fw-normal text-uppercase text-primary">For rent</h4>
+                <h3 class="h6 mb-2 fs-base"><a class="nav-link stretched-link" href="{% url 'hostel-single-view' property.pk %}">{{ property.title }} | {{ property.total_area }} sq.m</a></h3>
+                <p class="mb-2 fs-sm text-muted">{{ property.street_address }} {{ property.city }}, {{ property.state }}, {{ property.pin_code}}</p>
+                <div class="fw-bold"><i class="fi-friends mt-n1 me-2 lead align-middle opacity-70"></i>{% if property.category == 'boys' %}Boys{% else %}Girls{% endif %}</div>
+                <div class="d-flex align-items-center justify-content-center justify-content-sm-start border-top pt-3 pb-2 mt-3 text-nowrap">
+                  {% if property.wifi %}<span class="d-inline-block mx-1 px-2 fs-sm"
+                      ><i class="fi-wifi ms-1 mt-n1 fs-lg text-muted"></i></span>{% endif %}
+                  {% if property.mess %}<span class="d-inline-block mx-1 px-2 fs-sm">
+                    <i class="fi-cafe ms-1 mt-n1 fs-lg text-muted"></i></span>{% endif %}
+                  {% if property.air_conditioning %}<span class="d-inline-block mx-1 px-2 fs-sm"
+                      ><i class="fi-snowflake ms-1 mt-n1 fs-lg text-muted"></i></span>{% endif %}
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+            <!-- Item-->
+          </div>
+        </div>
+      </div>
+    </main>
+    {% endblock content %}

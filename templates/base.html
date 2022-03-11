@@ -1,0 +1,194 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+    <meta charset="utf-8">
+    <title>HomeAgain | Hostels</title>
+    <!-- SEO Meta Tags-->
+    <meta name="description" content="Finder - Directory &amp; Listings Bootstrap Template">
+    <meta name="keywords" content="bootstrap, business, directory, listings, e-commerce, car dealer, city guide, real estate, job board, user account, multipurpose, ui kit, html5, css3, javascript, gallery, slider, touch">
+    <meta name="author" content="Createx Studio">
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon and Touch Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" color="#5bbad5" href="{% static 'safari-pinned-tab.svg' %}">
+    <meta name="msapplication-TileColor" content="#766df4">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Page loading styles-->
+    <style>
+      .page-loading {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-transition: all .4s .2s ease-in-out;
+        transition: all .4s .2s ease-in-out;
+        background-color: #fff;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 9999;
+      }
+      .page-loading.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .page-loading-inner {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        -webkit-transition: opacity .2s ease-in-out;
+        transition: opacity .2s ease-in-out;
+        opacity: 0;
+      }
+      .page-loading.active > .page-loading-inner {
+        opacity: 1;
+      }
+      .page-loading-inner > span {
+        display: block;
+        font-size: 1rem;
+        font-weight: normal;
+        color: #666276;;
+      }
+      .page-spinner {
+        display: inline-block;
+        width: 2.75rem;
+        height: 2.75rem;
+        margin-bottom: .75rem;
+        vertical-align: text-bottom;
+        border: .15em solid #bbb7c5;
+        border-right-color: transparent;
+        border-radius: 50%;
+        -webkit-animation: spinner .75s linear infinite;
+        animation: spinner .75s linear infinite;
+      }
+      @-webkit-keyframes spinner {
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes spinner {
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      
+    </style>
+    <!-- Page loading scripts-->
+    <script>
+      (function () {
+        window.onload = function () {
+          var preloader = document.querySelector('.page-loading');
+          preloader.classList.remove('active');
+          setTimeout(function () {
+            preloader.remove();
+          }, 2000);
+        };
+      })();
+      
+    </script>
+    <!-- Vendor Styles-->
+    <link rel="stylesheet" media="screen" href="{% static 'vendor/simplebar/dist/simplebar.min.css' %}"/>
+    <link rel="stylesheet" media="screen" href="{% static 'vendor/nouislider/dist/nouislider.min.css' %}"/>
+    <link rel="stylesheet" media="screen" href="{% static 'vendor/tiny-slider/dist/tiny-slider.css' %}"/>
+    <link rel="stylesheet" media="screen" href="{% static 'vendor/leaflet/dist/leaflet.css'%}"/>
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" href="{% static 'css/theme.min.css' %}">
+    <!-- Google Tag Manager-->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '../www.googletagmanager.com/gtm5445.html?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-WKV3GT5');
+    </script>
+  </head>
+  <!-- Body-->
+  <body>
+    <!-- Google Tag Manager (noscript)-->
+    <noscript>
+      <iframe src="http://www.googletagmanager.com/ns.html?id=GTM-WKV3GT5" height="0" width="0" style="display: none; visibility: hidden;"></iframe>
+    </noscript>
+    <!-- Page loading spinner-->
+    <div class="page-loading active">
+      <div class="page-loading-inner">
+        <div class="page-spinner"></div><span>Loading...</span>
+      </div>
+    </div>
+    <main class="page-wrapper">
+      {% include "modals.html" %}
+      {% include "navbar.html" %}
+      <!-- Page content-->
+
+      {% block content %}{% endblock content %}
+  <!-- Footer-->
+  <footer class="footer bg-dark pt-5">
+    <div class="container pb-2">
+      <div class="row align-items-center pb-4">
+        <div class="col-md-6 col-xl-5">
+          <!-- Links-->
+          <div class="row">
+            <div class="col-sm-4 mb-4">
+              <h3 class="h6 mb-2 pb-1 fs-base text-light">HomeAgain</h3>
+              <ul class="list-unstyled fs-sm">
+                <li><a class="nav-link-light" href="{% url 'about-us-page' %}">About us</a></li>
+                <li><a class="nav-link-light" href="{% url 'contact-us-page' %}">Contacts</a></li>
+                <li><a class="nav-link-light" href="{% url 'help-center-page' %}">Help Center</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-4 mb-4">
+              <h3 class="h6 mb-2 pb-1 fs-base text-light">For Hostel Seekers</h3>
+              <ul class="list-unstyled fs-sm">
+                <li><a class="nav-link-light" href="#">Find hostels</a></li>
+                <li><a class="nav-link-light" href="#">Wishlist</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-4 mb-4">
+              <h3 class="h6 mb-2 pb-1 fs-base text-light">For Hostel Owners</h3>
+              <ul class="list-unstyled fs-sm">
+                <li><a class="nav-link-light" href="#">Post a property</a></li>
+                <li><a class="nav-link-light" href="#">My properties</a></li>
+              </ul>
+            </div>
+          </div>
+          <!-- Socials-->
+          <div class="text-nowrap border-top border-light py-4"><a class="btn btn-icon btn-translucent-light btn-xs rounded-circle me-2" href="#"><i class="fi-facebook"></i></a><a class="btn btn-icon btn-translucent-light btn-xs rounded-circle me-2" href="#"><i class="fi-twitter"></i></a><a class="btn btn-icon btn-translucent-light btn-xs rounded-circle me-2" href="#"><i class="fi-messenger"></i></a><a class="btn btn-icon btn-translucent-light btn-xs rounded-circle me-2" href="#"><i class="fi-telegram"></i></a><a class="btn btn-icon btn-translucent-light btn-xs rounded-circle" href="#"><i class="fi-whatsapp"></i></a></div>
+        </div>
+        
+      </div>
+      <!-- Copyright-->
+      <p class="fs-sm text-center text-sm-start mb-4"><span class="text-light opacity-50">&copy; All rights reserved. Made by </span><a class="nav-link-light fw-bold" href="#" target="_blank" rel="noopener">Team CyberTek</a></p>
+    </div>
+  </footer>
+  <!-- Back to top button--><a class="btn-scroll-top" href="#top" data-scroll><span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon fi-chevron-up">   </i></a>
+  <!-- Vendor scrits: js libraries and plugins-->
+      <script src="{% static 'vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+      <script src="{% static 'vendor/simplebar/dist/simplebar.min.js' %}"></script>
+      <script src="{% static 'vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js' %}"></script>
+      <script src="{% static 'vendor/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.min.js' %}"></script>
+      <script src="{% static 'vendor/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js' %}"></script>
+      <script src="{% static 'vendor/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.min.js' %}"></script>
+      <script src="{% static 'vendor/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.min.js' %}"></script>
+      <script src="{% static 'vendor/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.min.js' %}"></script>
+      <script src="{% static 'vendor/filepond/dist/filepond.min.js' %}"></script>
+      <script src="{% static 'vendor/leaflet/dist/leaflet.js' %}"></script>
+      <script src="{% static 'vendor/tiny-slider/dist/min/tiny-slider.js' %}"></script>
+      <script src="{% static 'vendor/nouislider/dist/nouislider.min.js' %}"></script>
+      <!-- Main theme script-->
+      <script src="{% static 'js/theme.min.js' %}"></script>
+</body>
+
+</html>

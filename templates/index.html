@@ -1,0 +1,285 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+      <!-- Hero-->
+      <section class="container pt-5 my-5 pb-lg-4">
+        <div class="row pt-0 pt-md-2 pt-lg-0">
+          <div class="col-xl-7 col-lg-6 col-md-5 order-md-2 mb-4 mb-lg-3"><img style="height: ;" src="{% static 'img/real-estate/hero-image.jpg' %}" alt="Hero image"></div>
+          <div class="col-xl-5 col-lg-6 col-md-7 order-md-1 pt-xl-5 pe-lg-0 mb-3 text-md-start text-center">
+            <h1 class="display-5 mt-lg-5 mb-md-4 mb-3 pt-md-4 pb-lg-2">Easy way to find <br> a perfect place to stay</h1>
+            <p class="position-relative lead me-lg-n5">We provide a complete service for the rental of hostels, PGs and apartments. Search hundreds of hostels and apartments on HomeAgain.</p>
+          </div>
+          <!-- Search property form group-->
+          <div class="col-xl-6 col-lg-8 order-3 mt-lg-n5">
+            <form class="form-group d-block" method="GET" action="{% url 'hostels-catalog-page' %}">
+              <div class="row g-0 ms-sm-n2">
+                <div class="col-md-6 d-sm-flex align-items-center">
+                  <div class="dropdown border-end-sm">
+                    {{ hostel_search_form.institute }}
+                  </div>
+                </div>
+                <div class="col-md-6 d-sm-flex align-items-center">
+                  <div class="dropdown border-end-sm">
+                    {{ hostel_search_form.category }}
+                  </div>
+                  <button class="btn btn-icon btn-primary px-3 w-100 w-sm-auto flex-shrink-0" type="submit"><i class="fi-search"></i><span class="d-sm-none d-inline-block ms-2">Search</span></button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+      <!-- Property categories-->
+      <section class="container mb-5">
+        <div class="row row-cols-lg-6 row-cols-sm-3 row-cols-3 g-3 g-xl-4">
+          <div class="col"><a class="icon-box card card-body h-100 border-0 shadow-sm card-hover h-100 text-center" href="#">
+              <div class="icon-box-media bg-faded-primary text-primary rounded-circle mb-3 mx-auto"><i class="fi-real-estate-house"></i></div>
+              <h3 class="icon-box-title fs-base mb-0">Boys Hostels</h3></a></div>
+          <div class="col"><a class="icon-box card card-body h-100 border-0 shadow-sm card-hover h-100 text-center" href="#">
+              <div class="icon-box-media bg-faded-primary text-primary rounded-circle mb-3 mx-auto"><i class="fi-apartment"></i></div>
+              <h3 class="icon-box-title fs-base mb-0">Girls Hostels</h3></a></div>
+          <div class="col"><a class="icon-box card card-body h-100 border-0 shadow-sm card-hover h-100 text-center" href="#">
+              <div class="icon-box-media bg-faded-primary text-primary rounded-circle mb-3 mx-auto"><i class="fi-shop"></i></div>
+              <h3 class="icon-box-title fs-base mb-0">PG</h3></a></div>
+          <div class="col"><a class="icon-box card card-body h-100 border-0 shadow-sm card-hover h-100 text-center" href="#">
+              <div class="icon-box-media bg-faded-primary text-primary rounded-circle mb-3 mx-auto"><i class="fi-rent"></i></div>
+              <h3 class="icon-box-title fs-base mb-0">Apartments</h3></a></div>
+        </div>
+      </section>
+      <hr class="mt-n1 mb-5 d-md-none">
+      <!-- Top offers (carousel)-->
+      <section class="container mb-5 pb-md-4">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <h2 class="h3 mb-0">Top offers</h2>
+        </div>
+        <div class="tns-carousel-wrapper tns-controls-outside-xxl tns-nav-outside tns-nav-outside-flush mx-n2">
+          <div class="tns-carousel-inner row gx-4 mx-0 pt-3 pb-4" data-carousel-options="{&quot;items&quot;: 4, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:2},&quot;768&quot;:{&quot;items&quot;:3},&quot;992&quot;:{&quot;items&quot;:4}}}">
+            <!-- Item-->
+            {% for property in properties %}
+            <div class="col">
+              <div class="card shadow-sm card-hover border-0 h-100">
+                <div class="tns-carousel-wrapper card-img-top card-img-hover">
+                  <a class="img-overlay" href="{% url 'hostel-single-view' property.pk %}"></a>
+                  <div class="position-absolute start-0 top-0 pt-3 ps-3">
+                    <span class="d-table badge bg-success mb-1">Verified</span
+                    ><span class="d-table badge bg-info">New</span>
+                  </div>
+                  <div class="content-overlay end-0 top-0 pt-3 pe-3">
+                    <a
+                      href="{% url 'add-hostel-wishlist' property.pk %}"
+                      class="btn btn-icon btn-light btn-xs text-primary rounded-circle"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="left"
+                      title="Add to Wishlist"
+                    >
+                      <i class="fi-heart"></i>
+                  </a>
+                  </div>
+                  <div class="tns-carousel-inner">
+                    {% for img in property.hostel_images_set.all %}
+                    <img style="width: 612px; height:250px;"
+                      src="{{ img.image.url }}"
+                      alt="Image"/>
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="card-body position-relative pb-3">
+                  <h4
+                    class="mb-1 fs-xs fw-normal text-uppercase text-primary"
+                  >
+
+                  </h4>
+                  <h3 class="h6 mb-2 fs-base">
+                    <a
+                      class="nav-link stretched-link"
+                      href="{% url 'hostel-single-view' property.pk %}"
+                      >{{ property.title }} | {{ property.total_area }} sq.m</a
+                    >
+                  </h3>
+                  <p class="mb-2 fs-sm text-muted">
+                    <i class="fi-map-pin me-1"></i>{{ property.street_address }} {{ property.city }}, {{ property.state }}, {{ property.pin_code}} 
+                  </p>
+                  <div class="fw-bold">
+                    <i
+                      class="fi-friends mt-n1 me-2 lead align-middle opacity-70"
+                    ></i
+                    >{% if property.category == 'boys' %}Boys{% else %}Girls{% endif %}
+                  </div>
+                </div>
+              </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+      <!-- Recently added-->
+      {% if user.is_authenticated %}
+      <section class="container pb-4 pt-1 mb-5">
+        <div class="d-flex align-items-end align-items-lg-center justify-content-between mb-4 pb-md-2">
+          <div class="d-flex w-100 align-items-center justify-content-between justify-content-lg-start">
+            <h2 class="h3 mb-0 me-md-4">Your Wishlist</h2>
+          </div><a class="btn btn-link fw-normal d-none d-lg-block p-0" href="{% url 'user-account-wishlist-page' %}">View all<i class="fi-arrow-long-right ms-2"></i></a>
+        </div>
+        <div class="row g-4">
+          {% if wishlist.0 %}
+          <div class="col-md-6">
+            <div class="card bg-size-cover bg-position-center border-0 overflow-hidden h-100" style="background-image: url({{ wishlist_img.0.image.url }});"><span class="img-gradient-overlay"></span>
+              <div class="card-body content-overlay pb-0">
+                <div class="d-flex"><span class="badge bg-success fs-sm me-2">Verified</span><span class="badge bg-info fs-sm">New</span></div>
+              </div>
+              <div class="card-footer content-overlay border-0 pt-0 pb-4">
+                <div class="d-sm-flex justify-content-between align-items-end pt-5 mt-2 mt-sm-5"><a class="text-decoration-none text-light pe-2" href="real-estate-single.html">
+                    <div class="fs-sm text-uppercase pt-2 mb-1">For {% if wishlist.0.category == 'M' %}Boys{% else %}Girls{% endif %}</div>
+                    <h3 class="h5 text-light mb-1">{{ wishlist.0.title }}</h3>
+                    <div class="fs-sm opacity-70"><i class="fi-map-pin me-1"></i>{{ wishlist.0.street_address }} {{ wishlist.0.city }}, {{ wishlist.0.state }}, {{ wishlist.0.pin_code}}</div></a>
+                  <div class="btn-group ms-n2 ms-sm-0 mt-3"><a class="btn btn-primary px-3" href="real-estate-single.html" style="height: 2.75rem;">Explore</a>
+                    <a href="{% url 'remove-hostel-wishlist' wishlist.0.pk %}" class="btn btn-primary btn-icon border-end-0 border-top-0 border-bottom-0 border-light fs-sm"><i class="fi-heart-filled"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          <div class="col-md-6">
+            {% if wishlist.1 %}
+            <div class="card bg-size-cover bg-position-center border-0 overflow-hidden mb-4" style="background-image: url({{ wishlist_img.1.image.url }});"><span class="img-gradient-overlay"></span>
+              <div class="card-body content-overlay pb-0"><span class="badge bg-info fs-sm">New</span></div>
+              <div class="card-footer content-overlay border-0 pt-0 pb-4">
+                <div class="d-sm-flex justify-content-between align-items-end pt-5 mt-2 mt-sm-5"><a class="text-decoration-none text-light pe-2" href="real-estate-single.html">
+                    <div class="fs-sm text-uppercase pt-2 mb-1">For {% if wishlist.1.category == 'M' %}Boys{% else %}Girls{% endif %}</div>
+                    <h3 class="h5 text-light mb-1">{{ wishlist.1.title }}</h3>
+                    <div class="fs-sm opacity-70"><i class="fi-map-pin me-1"></i>{{ wishlist.1.street_address }} {{ wishlist.1.city }}, {{ wishlist.1.state }}, {{ wishlist.1.pin_code}}</div></a>
+                  <div class="btn-group ms-n2 ms-sm-0 mt-3"><a class="btn btn-primary px-3" href="real-estate-single.html" style="height: 2.75rem;">Explore</a>
+                    <a href="{% url 'remove-hostel-wishlist' wishlist.1.pk %}" class="btn btn-primary btn-icon border-end-0 border-top-0 border-bottom-0 border-light fs-sm"><i class="fi-heart-filled"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+            {% if wishlist.2 %}
+            <div class="card bg-size-cover bg-position-center border-0 overflow-hidden" style="background-image: url({{ wishlist_img.2.image.url }});"><span class="img-gradient-overlay"></span>
+              <div class="card-body content-overlay pb-0"><span class="badge bg-info fs-sm">New</span></div>
+              <div class="card-footer content-overlay border-0 pt-0 pb-4">
+                <div class="d-sm-flex justify-content-between align-items-end pt-5 mt-2 mt-sm-5"><a class="text-decoration-none text-light pe-2" href="real-estate-single.html">
+                    <div class="fs-sm text-uppercase pt-2 mb-1">For {% if wishlist.2.category == 'M' %}Boys{% else %}Girls{% endif %}</div>
+                    <h3 class="h5 text-light mb-1">{{ wishlist.2.title }}</h3>
+                    <div class="fs-sm opacity-70"><i class="fi-map-pin me-1"></i>{{ wishlist.2.street_address }} {{ wishlist.2.city }}, {{ wishlist.2.state }}, {{ wishlist.2.pin_code}}</div></a>
+                  <div class="btn-group ms-n2 ms-sm-0 mt-3"><a class="btn btn-primary px-3" href="real-estate-single.html" style="height: 2.75rem;">Explore</a>
+                    <a href="{% url 'remove-hostel-wishlist' wishlist.2.pk %}" class="btn btn-primary btn-icon border-end-0 border-top-0 border-bottom-0 border-light fs-sm"><i class="fi-heart-filled"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </section>
+      {% endif %}
+      <!-- Cities (carousel)-->
+      <section class="container mb-5 pb-2">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <h2 class="h3 mb-0">Search property by city<h2 class="text-muted">(Coming soon)</h2></h2><a class="btn btn-link fw-normal ms-md-3 pb-0" href="{% url 'hostels-catalog-page' %}">View all<i class="fi-arrow-long-right ms-2"></i></a>
+        </div>
+        <div class="tns-carousel-wrapper tns-controls-outside-xxl tns-nav-outside tns-nav-outside-flush mx-n2">
+          <div class="tns-carousel-inner row gx-4 mx-0 py-md-4 py-3" data-carousel-options="{&quot;items&quot;: 4, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:2},&quot;768&quot;:{&quot;items&quot;:3},&quot;992&quot;:{&quot;items&quot;:4}}}">
+            <!-- Item-->
+            <div class="col"><a class="card shadow-sm card-hover border-0" href="{% url 'hostels-catalog-page' %}">
+                <div class="card-img-top card-img-hover"><span class="img-overlay opacity-65"></span><img style="width: 612px; height:250px;" src="{% static 'img/real-estate/city/Indore.png' %}" alt="New York">
+                  <div class="content-overlay start-0 top-0 d-flex align-items-center justify-content-center w-100 h-100 p-3">
+                    <div class="w-100 p-1">
+                      <div class="pt-1">
+                        <h4 class="mb-2 fs-xs fw-normal text-light"><i class="fi-home mt-n1 me-2 fs-sm align-middle"></i>Hostels for rent</h4>
+                        <div class="d-flex align-items-center">
+                          <div class="progress progress-light w-100">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div><span class="text-light fs-sm ps-1 ms-2">3756</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body text-center">
+                  <h3 class="mb-0 fs-base text-nav">Indore</h3>
+                </div></a>
+              </div>
+            <!-- Item-->
+            <div class="col"><a class="card shadow-sm card-hover border-0" href="{% url 'hostels-catalog-page' %}">
+                <div class="card-img-top card-img-hover"><span class="img-overlay opacity-65"></span><img style="width: 612px; height:250px;" src="{% static 'img/real-estate/city/bhopal.jpg' %}" alt="Chicago">
+                  <div class="content-overlay start-0 top-0 d-flex align-items-center justify-content-center w-100 h-100 p-3">
+                    <div class="w-100 p-1">
+                      <div class="pt-1">
+                        <h4 class="mb-2 fs-xs fw-normal text-light"><i class="fi-home mt-n1 me-2 fs-sm align-middle"></i>Hostels for rent</h4>
+                        <div class="d-flex align-items-center">
+                          <div class="progress progress-light w-100">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div><span class="text-light fs-sm ps-1 ms-2">1540</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body text-center">
+                  <h3 class="mb-0 fs-base text-nav">Bhopal</h3>
+                </div></a></div>
+            <!-- Item-->
+            <div class="col"><a class="card shadow-sm card-hover border-0" href="{% url 'hostels-catalog-page' %}">
+                <div class="card-img-top card-img-hover"><span class="img-overlay opacity-65"></span><img style="width: 612px; height:250px;" src="{% static 'img/real-estate/city/ujjain.jpg' %}" alt="Los Angeles">
+                  <div class="content-overlay start-0 top-0 d-flex align-items-center justify-content-center w-100 h-100 p-3">
+                    <div class="w-100 p-1">
+                      <div class="pt-1">
+                        <h4 class="mb-2 fs-xs fw-normal text-light"><i class="fi-home mt-n1 me-2 fs-sm align-middle"></i>Hostels for rent</h4>
+                        <div class="d-flex align-items-center">
+                          <div class="progress progress-light w-100">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div><span class="text-light fs-sm ps-1 ms-2">692</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body text-center">
+                  <h3 class="mb-0 fs-base text-nav">Ujjain</h3>
+                </div></a></div>
+            <!-- Item-->
+            <div class="col"><a class="card shadow-sm card-hover border-0" href="{% url 'hostels-catalog-page' %}">
+                <div class="card-img-top card-img-hover"><span class="img-overlay opacity-65"></span><img style="width: 612px; height:250px;" src="{% static 'img/real-estate/city/gwalior.jpg' %}" alt="San Diego">
+                  <div class="content-overlay start-0 top-0 d-flex align-items-center justify-content-center w-100 h-100 p-3">
+                    <div class="w-100 p-1">
+                      <div class="pt-1">
+                        <h4 class="mb-2 fs-xs fw-normal text-light"><i class="fi-home mt-n1 me-2 fs-sm align-middle"></i>Hostels for rent</h4>
+                        <div class="d-flex align-items-center">
+                          <div class="progress progress-light w-100">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div><span class="text-light fs-sm ps-1 ms-2">1854</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body text-center">
+                  <h3 class="mb-0 fs-base text-nav">Gwalior</h3>
+                </div></a></div>
+            <!-- Item-->
+            <div class="col"><a class="card shadow-sm card-hover border-0" href="{% url 'hostels-catalog-page' %}">
+                <div class="card-img-top card-img-hover"><span class="img-overlay opacity-65"></span><img style="width: 612px; height:250px;" src="{% static 'img/real-estate/city/jabalpur.jpg' %}" alt="Dallas">
+                  <div class="content-overlay start-0 top-0 d-flex align-items-center justify-content-center w-100 h-100 p-3">
+                    <div class="w-100 p-1">
+                      <div class="pt-1">
+                        <h4 class="mb-2 fs-xs fw-normal text-light"><i class="fi-home mt-n1 me-2 fs-sm align-middle"></i>Hostels for rent</h4>
+                        <div class="d-flex align-items-center">
+                          <div class="progress progress-light w-100">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div><span class="text-light fs-sm ps-1 ms-2">1204</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body text-center">
+                  <h3 class="mb-0 fs-base text-nav">Jabalpur</h3>
+                </div></a></div>
+          </div>
+        </div>
+      </section>
+    </main>
+    {% endblock content %}

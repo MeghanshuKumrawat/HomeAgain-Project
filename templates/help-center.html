@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+      <!-- Page content-->
+      <!-- Breadcrumb-->
+      <div class="container mt-5 mb-md-4 pt-5">
+        <nav class="mb-3 pt-md-3" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Help center</li>
+          </ol>
+        </nav>
+      </div>
+      <!-- Page header-->
+      <section class="container mb-4 pb-lg-5">
+        <h1 class="mx-auto mb-4 pb-2 text-center" style="max-width: 856px;">Hi, how can we help?</h1>
+        <!-- Search form-->
+        <form class="form-group mb-4">
+          <div class="input-group input-group-lg">
+            <input class="form-control" type="text" placeholder="What are you looking for?">
+          </div>
+          <button class="btn btn-primary btn-lg px-sm-4 px-3" type="submit"><i class="fi-search me-sm-2"></i><span class="d-sm-inline d-none">Search</span></button>
+        </form>
+        
+      </section>
+      <!-- Page content-->
+      <section class="container mb-md-5 mb-4 pb-lg-5">
+        <div class="row">
+          <!-- Sidebar offcanvas-->
+          <aside class="col-xl-2 col-lg-3">
+            <div class="offcanvas offcanvas-start offcanvas-collapse" id="help-sidebar">
+              <div class="offcanvas-header shadow-sm mb-2">
+                <h2 class="h5 mb-0">FAQ</h2>
+                <button class="btn-close" type="button" data-bs-dismiss="offcanvas"></button>
+              </div>
+              <div class="offcanvas-body">
+                <ul class="nav nav-tabs navbar-nav flex-column m-0 text-lg-center">
+                  <li class="nav-item px-0"><a class="nav-link active px-3" href="#">Privacy Policy of HomeAgain</a></li>
+                </ul>
+              </div>
+            </div>
+          </aside>
+          <!-- Content-->
+          <div class="col-lg-9 offset-xl-1 col-lg-8">
+            <h2 class="mb-md-4 mb-3 pb-md-2">Privacy Policy of HomeAgain</h2>
+            <div class="pb-md-2">
+              <h3 class="h5">Thanks for reading privacy policy of HomeAgain.</h3>
+              <p>Your privacy is the most important for us. We shall not disclose information provided by you to any third party, without your permission and the information provided by you will be kept strictly confidential and except to the hostel owners or in the event wherein you communicate with the hostel owner's directly. HomeAgain has developed this privacy policy to secure your personal information data and keep it non-public. HomeAgain follows strict procedures to help protect the confidentiality, security, and integrity of data stored on our systems.</p>
+            </div>
+            <div class="pb-md-2">
+              <h3 class="h5">Anti-Spam Policy</h3>
+              <p>Any contact details given by you, HomeAgain will not provide to third parties. If a user wishes to subscribe to our newsletters, we ask for your email address, which will never be disclosed to any third party.</p>
+            </div>
+            <div class="pb-md-2">
+              <h3 class="h5">Sharing</h3>
+              <p>HomeAgain, where collaboration with other associates are formed, we will share collected information with them. This is not connected to any private information that can recognize any person.
+                We may associate with another party to provide services. When the users sign-up for these services, HomeAgain can share contact details that is required for the third party.
+                HomeAgain owned the rights to share User's contact detail with one or many parties to provide better information.
+                These parties are not allowed to use personally recognizable information except for the purpose of providing these services.</p>
+            </div>
+            <div class="pb-md-2">
+              <h3 class="h5">External Links</h3>
+              <p>HomeAgain is not responsible for the confidentiality or the content of such websites those contain links to other sites our emails, and other electronic publications.</p>
+            </div>
+            <div class="pb-md-2">
+              <h3 class="h5">Notification of Changes</h3>
+              <p>If HomeAgain decides to change its Privacy Policy, those changes will be posted on our website so our users are ever aware of what information collected by us, how we use it, and under what circumstances, if any, we disclose it. We will use information in accordance with the Privacy Policy under which the information was collected.
+                HomeAgain employs program to monitor traffic to identify unauthorized attempts to upload or change data or otherwise cause damage. For Site security purposes and to ensure that our Services remain available to all users. Notwithstanding anything stated above, we reserve the right to use information from these sources to help identify an individual or prosecute malicious use or misuse of the Site.</p>
+            </div>
+            <div class="pb-md-2">
+              <h3 class="h5">Kids' Safety and Privacy</h3>
+              <p>HomeAgain is not directed to person under the age of 18, and does not knowingly get personal information from kids.</p>
+            </div>
+            <div class="pb-md-2">
+              <h3 class="h5">Grievances and Solution</h3>
+              <p>With positively co-operation of users, HomeAgain is dedicated to address any grievances that you might have in connection with our use of any information that you provide us. Accordingly, you may communicate any grievances that you might have by e-mailing, phoning, us at contact numbers provided here.</p>
+            </div>
+            <div class="pb-md-2">
+              <h3 class="h5">For Hostel Owners</h3>
+              <p>HomeAgain owned the all rights to share free listing & paid listing Hostel's contact information, email, website, facilities, rent, images, detail or other data which are shown in the hostel's individual page on HomeAgain with one or many parties to provide better information.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Contact us-->
+      <section class="container mb-5 pb-lg-5">
+        <div class="row align-items-sm-center">
+          <div class="col-sm-5"><img src="{% static 'img/real-estate/illustrations/support.svg' %}" alt="Illustration"></div>
+          <div class="col-md-6 offset-md-1 col-sm-7 text-sm-start text-center">
+            <h2 class="mb-4 pb-md-3">Can’t find what you are looking for?</h2><a class="btn btn-lg btn-primary" href="{% url 'contact-us-page' %}">Contact us now</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    {% endblock content %}
