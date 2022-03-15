@@ -1,5 +1,5 @@
 # HomeAgain-Project
-Machine Learnig based Hostel Listing System
+Machine Learning based Hostel Listing System
 
 # Problem Statement
 To recommend hostels using real time primary data and filer hostels as per
