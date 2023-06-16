@@ -32,14 +32,7 @@
             </div>
           </div>
           <div class="col-md-6 px-4 pt-2 pb-4 px-sm-5 pb-sm-5 pt-md-5">
-            <a class="btn btn-outline-info w-100 mb-3" href="#"
-              ><i class="fi-google fs-lg me-1"></i>Sign in with Google</a
-            ><a class="btn btn-outline-info w-100 mb-3" href="#"
-              ><i class="fi-facebook fs-lg me-1"></i>Sign in with Facebook</a
-            >
             <div class="d-flex align-items-center py-3 mb-3">
-              <hr class="w-100" />
-              <div class="px-3">Or</div>
               <hr class="w-100" />
             </div>
             <form class="needs-validation" novalidate, method="post">{% csrf_token %}
@@ -95,8 +88,6 @@
     </div>
   </div>
 </div>
-
-<!-- Sign Up Modal-->
 <div class="modal fade" id="signup-modal" tabindex="-1" aria-hidden="true">
   <div
     class="modal-dialog modal-lg modal-dialog-centered p-2 my-0 mx-auto"
@@ -111,114 +102,61 @@
         ></button>
         <div class="row mx-0 align-items-center">
           <div class="col-md-6 border-end-md p-4 p-sm-5">
-            <h2 class="h3 mb-4 mb-sm-5">
-              Join HomeAgain.<br />Get premium benefits:
-            </h2>
-            <ul class="list-unstyled mb-4 mb-sm-5">
-              <li class="d-flex mb-2">
-                <i class="fi-check-circle text-primary mt-1 me-2"></i
-                ><span>Add and promote your listings</span>
-              </li>
-              <li class="d-flex mb-2">
-                <i class="fi-check-circle text-primary mt-1 me-2"></i
-                ><span>Easily manage your wishlist</span>
-              </li>
-              <li class="d-flex mb-0">
-                <i class="fi-check-circle text-primary mt-1 me-2"></i
-                ><span>Leave reviews</span>
-              </li>
-            </ul>
+            <h2 class="h3 mb-4 mb-sm-5">Hey there!<br />Join HomeAgain..</h2>
             <img
               class="d-block mx-auto"
-              src="{% static 'img/signin-modal/signup.svg' %}"
+              src="{% static 'img/signin-modal/signin.svg' %}"
               width="344"
               alt="Illustartion"
             />
-            <div class="mt-sm-4 pt-md-3">
-              Already have an account?
+            <div class="mt-4 mt-sm-5">
+              Don't have an account?
               <a
-                href="#signin-modal"
+                href="#signup-modal"
                 data-bs-toggle="modal"
                 data-bs-dismiss="modal"
-                >Sign in</a
+                >Sign up here</a
               >
             </div>
           </div>
           <div class="col-md-6 px-4 pt-2 pb-4 px-sm-5 pb-sm-5 pt-md-5">
-            <a class="btn btn-outline-info w-100 mb-3" href="#"
-              ><i class="fi-google fs-lg me-1"></i>Sign in with Google</a
-            ><a class="btn btn-outline-info w-100 mb-3" href="#"
-              ><i class="fi-facebook fs-lg me-1"></i>Sign in with Facebook</a
-            >
             <div class="d-flex align-items-center py-3 mb-3">
               <hr class="w-100" />
-              <div class="px-3">Or</div>
-              <hr class="w-100" />
             </div>
-            <form class="needs-validation" novalidate method="post">{% csrf_token %}
+            <form class="needs-validation" novalidate, method="post">{% csrf_token %}
               <div class="mb-4">
-                <label class="form-label" for="signup-name">Username</label>
+                <label class="form-label mb-2" for="signin-email"
+                  >Username</label
+                >
                 {{ sign_up_form.username }}
-                <!-- <input
-                  class="form-control"
-                  type="text"
-                  id="signup-name"
-                  placeholder="Enter your full name"
-                  required
-                /> -->
               </div>
               <div class="mb-4">
-                <label class="form-label" for="signup-email"
-                  >Email address</label
+                <label class="form-label mb-2" for="signin-email"
+                  >Email</label
                 >
                 {{ sign_up_form.email }}
-                <!-- <input
-                  class="form-control"
-                  type="email"
-                  id="signup-email"
-                  placeholder="Enter your email"
-                  required
-                /> -->
               </div>
               <div class="mb-4">
-                <label class="form-label" for="signup-email"
-                  >Account type</label
+                <label class="form-label mb-2" for="signin-email"
+                  >User Type</label
                 >
                 {{ sign_up_form.user_type }}
+
               </div>
               <div class="mb-4">
-                <label class="form-label" for="signup-password"
-                  >Password
-                  <span class="fs-sm text-muted">min. 8 char</span></label
+                <label class="form-label mb-2" for="signin-email"
+                  >Password</label
                 >
-                <div class="password-toggle">
-                  {{ sign_up_form.password1 }}
-                  <label
-                    class="password-toggle-btn"
-                    aria-label="Show/hide password"
-                  >
-                    <input class="password-toggle-check" type="checkbox" /><span
-                      class="password-toggle-indicator"
-                    ></span>
-                  </label>
-                </div>
+                {{ sign_up_form.password1 }}
               </div>
               <div class="mb-4">
-                <label class="form-label" for="signup-password-confirm"
-                  >Confirm password</label
+                <label class="form-label mb-2" for="signin-email"
+                  >Confirm Password</label
                 >
-                <div class="password-toggle">
-                  {{ sign_up_form.password2 }}
-                  <label
-                    class="password-toggle-btn"
-                    aria-label="Show/hide password"
-                  >
-                    <input class="password-toggle-check" type="checkbox" /><span
-                      class="password-toggle-indicator"
-                    ></span>
-                  </label>
-                </div>
+                {{ sign_up_form.password2 }}
+
               </div>
+              
               <div class="form-check mb-4">
                 {{ sign_up_form.terms }}
                 <label class="form-check-label" for="agree-to-terms"
@@ -236,6 +174,7 @@
     </div>
   </div>
 </div>
+
 <!-- Property cost calculator modal-->
 <div class="modal fade" id="cost-calculator" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="document">

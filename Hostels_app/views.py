@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from Users_app.forms import Create_Hostel_Form, Hostel_Image_Form, Hostel_Review_Form, Sign_In_Form, Sign_Up_Form, Hostel_Filter_Form
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.conf import settings
 from .models import Hostel, Hostel_images, HostelReview, Wishlist
 from .analysis import calculate_sentiment
 from .filters import HostelFilter
@@ -15,7 +16,7 @@ import sqlite3
 import os
 
 def main(request):
-    cnx = sqlite3.connect('C:\\Users\\hp\\Desktop\\Home_Again_Project\\db.sqlite3')
+    cnx = sqlite3.connect(os.path.join(settings.BASE_DIR, 'db.sqlite3'))
     data = pandas.read_sql_query("select * from Hostels_app_hostel", cnx)
     
     newdata = data
@@ -103,8 +104,7 @@ def vendor_account_properties(request):
     return render(request, 'vendor-account-properties.html', context)
 
 def hostels_catalog(request):
-    p = main(request)
-    properties_list = Hostel.objects.filter(id__in=p).order_by('-sentiment')
+    properties_list = Hostel.objects.all().order_by('-sentiment')
     if request.GET.get('air_conditioning')=='on':
         properties_list.filter(air_conditioning=True)
 
