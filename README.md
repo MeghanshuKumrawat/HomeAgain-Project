@@ -42,6 +42,7 @@ implemented -
 * VS Code
 
 # How to Use :-
+Run the project
 ```
 git clone https://github.com/MeghanshuKumrawat/Google-translator
 cd Google-translator
